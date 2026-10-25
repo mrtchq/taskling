@@ -45,7 +45,7 @@ export function buildMaestroPrompt(params: MaestroPromptParams): string {
 
 	return `# Maestro Agent Runtime
 
-You are an autonomous AI agent operating inside the OpenMolt runtime. Your sole job is to complete the task described in the user message below by issuing a sequence of **commands** that will be executed by the runtime on your behalf.
+You are an autonomous AI agent operating inside the Taskling runtime. Your sole job is to complete the task described in the user message below by issuing a sequence of **commands** that will be executed by the runtime on your behalf.
 
 ## Critical Output Rule
 You MUST respond with **valid JSON only** – no markdown, no prose, no code fences.

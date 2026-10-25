@@ -121,7 +121,7 @@ export class Agent {
 
 	/**
 	 * @param config       - Agent configuration.
-	 * @param omConfig     - Parent OpenMolt configuration.
+	 * @param omConfig     - Parent Taskling configuration.
 	 * @param integrations - All integrations registered in the OpenMolt instance.
 	 */
 	constructor(
@@ -481,15 +481,15 @@ export class Agent {
 		const llmCfg = this.omConfig.llmProviders;
 		switch (providerKey.toLowerCase()) {
 			case 'openai': {
-				const key = llmCfg?.openai?.apiKey ?? process.env.OPENMOLT_OPENAI_API_KEY ?? '';
+				const key = llmCfg?.openai?.apiKey ?? process.env.TASKLING_OPENAI_API_KEY ?? process.env.OPENMOLT_OPENAI_API_KEY ?? '';
 				return new OpenAIProvider(key);
 			}
 			case 'anthropic': {
-				const key = llmCfg?.anthropic?.apiKey ?? process.env.OPENMOLT_ANTHROPIC_API_KEY ?? '';
+				const key = llmCfg?.anthropic?.apiKey ?? process.env.TASKLING_ANTHROPIC_API_KEY ?? process.env.OPENMOLT_ANTHROPIC_API_KEY ?? '';
 				return new AnthropicProvider(key);
 			}
 			case 'google': {
-				const key = llmCfg?.google?.apiKey ?? process.env.OPENMOLT_GOOGLE_API_KEY ?? '';
+				const key = llmCfg?.google?.apiKey ?? process.env.TASKLING_GOOGLE_API_KEY ?? process.env.OPENMOLT_GOOGLE_API_KEY ?? '';
 				return new GoogleProvider(key);
 			}
 			default:

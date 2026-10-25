@@ -13,7 +13,7 @@ export interface LLMProviderConfig {
 	apiKey?: string;
 }
 
-/** Top-level OpenMolt configuration. */
+/** Top-level Taskling configuration. */
 export interface OpenMoltConfig {
 	/** LLM provider configurations keyed by provider name. */
 	llmProviders?: {
@@ -221,7 +221,7 @@ export type AgentCredential =
 
 /** Agent-level configuration for a single integration. */
 export interface AgentIntegrationConfig {
-	/** Handle of the integration to use (must be registered in OpenMolt). */
+	/** Handle of the integration to use (must be registered in Taskling). */
 	integration: string;
 	/** Credential information for authenticating with this integration. */
 	credential: AgentCredential;
@@ -255,7 +255,7 @@ export interface AgentConfig {
 	model: string;
 	/** Per-call model configuration (temperature, thinking, etc.). */
 	modelConfig?: ModelConfig;
-	/** Override top-level OpenMolt configuration for this agent. */
+	/** Override top-level Taskling configuration for this agent. */
 	config?: Partial<OpenMoltConfig>;
 	/** System instructions that guide the agent's behaviour (inline). */
 	instructions?: string;

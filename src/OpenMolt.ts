@@ -1,16 +1,19 @@
 /**
  * @module OpenMolt
- * The main entry-point class for the OpenMolt agent framework.
+ * The main entry-point class for the Taskling agent framework.
+ *
+ * Brand note: the class keeps its upstream name `OpenMolt` and is exported
+ * under the Taskling brand as an alias from src/index.ts (`Taskling`).
  *
  * Create an instance, optionally register additional integrations, then call
  * {@link OpenMolt.createAgent} to obtain a runnable {@link Agent}.
  *
  * @example
  * ```typescript
- * import OpenMolt from 'openmolt';
+ * import Taskling from 'taskling';
  *
- * const om = new OpenMolt({ llmProviders: { openai: { apiKey: 'sk-...' } } });
- * const agent = om.createAgent({ name: 'Bot', model: 'openai:gpt-4o', instructions: '...' });
+ * const tk = new Taskling({ llmProviders: { openai: { apiKey: 'sk-...' } } });
+ * const agent = tk.createAgent({ name: 'Bot', model: 'openai:gpt-4o', instructions: '...' });
  * const result = await agent.run('Hello!');
  * ```
  */
@@ -85,7 +88,7 @@ const BUILTIN_INTEGRATIONS: Record<string, IntegrationDefinition> = {
 };
 
 /**
- * The main OpenMolt class.
+ * The main Taskling class (upstream name retained: OpenMolt).
  *
  * Manages LLM provider configuration, integration registration, and agent creation.
  */
@@ -117,7 +120,7 @@ export class OpenMolt {
 	 *
 	 * @example
 	 * ```typescript
-	 * om.registerIntegration('myApi', {
+	 * tk.registerIntegration('myApi', {
 	 *   name: 'My API',
 	 *   apiSetup: { baseUrl: 'https://api.example.com' },
 	 *   tools: [ ... ],
@@ -163,7 +166,7 @@ export class OpenMolt {
 	 *
 	 * Register the result via {@link registerIntegration}:
 	 * ```typescript
-	 * om.registerIntegration('fileSystem', OpenMolt.FileSystemIntegration('/data'));
+	 * tk.registerIntegration('fileSystem', Taskling.FileSystemIntegration('/data'));
 	 * ```
 	 *
 	 * @param directories - Allowed base directory or array of directories.

@@ -1,18 +1,18 @@
 /**
- * @module openmolt
- * OpenMolt – Programmatic AI Agent System.
+ * @module taskling
+ * Taskling – Programmatic AI Agent System (fork of OpenMolt).
  *
  * @example
  * ```typescript
- * import OpenMolt from 'openmolt';
+ * import Taskling from 'taskling';
  * import { z } from 'zod';
  *
- * const om = new OpenMolt({
+ * const tk = new Taskling({
  *   llmProviders: { openai: { apiKey: 'sk-...' } },
  *   maxSteps: 15,
  * });
  *
- * const agent = om.createAgent({
+ * const agent = tk.createAgent({
  *   name: 'Researcher',
  *   model: 'openai:gpt-4o',
  *   instructions: 'You are a helpful research assistant.',
@@ -26,7 +26,9 @@
 
 // ─── Main class ───────────────────────────────────────────────────────────────
 export { OpenMolt } from './OpenMolt.js';
+export { OpenMolt as Taskling } from './OpenMolt.js';
 export { OpenMolt as default } from './OpenMolt.js';
+export type { OpenMoltConfig as TasklingConfig } from './types/index.js';
 
 // ─── Core classes ─────────────────────────────────────────────────────────────
 export { Agent } from './Agent.js';

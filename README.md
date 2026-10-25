@@ -1,18 +1,40 @@
-# OpenMolt
+> **TASKLING — fork of OpenMolt, distributed from GitHub only.**
+>
+> **Do NOT `npm publish` this package.** The bare name `taskling` on npm
+> is already taken by an unrelated package (`taskling@2.0.0`, maintainer
+> elidoran, repo elidoran/node-taskling — "Small simple async function
+> series"). By decision (2026-10-25), Taskling is GitHub-only for now:
+> npm is skipped entirely. Install from the public repo:
+>
+> ```bash
+> npm install github:mrtchq/taskling
+> ```
+>
+> Public repo: <https://github.com/mrtchq/taskling> (fork of
+> ybouane/openmolt.dev, MIT — see LICENSE, kept intact).
+>
+> Taskling is a fork of [OpenMolt](https://github.com/ybouane/openmolt.dev)
+> (MIT, Copyright 2026 Yassine Bouanane — see LICENSE, kept intact).
+> Brand: **Taskling** — "Spawn a Taskling", "Taskling Swarm" /
+> "Active Tasklings", "Taskling Engine", states Idle / Dispatched / Sleeping.
+> CLI: `taskling init`, `taskling deploy`, `taskling mcp`,
+> `taskling taskling.config.json`.
+
+# Taskling
 
 **Programmatic AI Agent System for Node.js / TypeScript**
 
-OpenMolt lets your code create autonomous AI agents that plan, reason, and act — calling real APIs, reading files, generating images, sending messages, and more. Agents run a self-directed reasoning loop (the *Maestro* loop) powered by any LLM until the task is complete.
+Taskling lets your code create autonomous AI agents that plan, reason, and act — calling real APIs, reading files, generating images, sending messages, and more. Agents run a self-directed reasoning loop (the *Maestro* loop) powered by any LLM until the task is complete.
 
 ```
-npm install openmolt
+npm install github:mrtchq/taskling
 ```
 
-→ **[openmolt.dev](https://openmolt.dev/)** — full documentation, API reference, and examples
+→ **[openmolt.dev](https://openmolt.dev/)** — upstream OpenMolt documentation (Taskling docs not yet published)
 
 ---
 
-## Why OpenMolt?
+## Why Taskling?
 
 | | |
 |---|---|
@@ -24,12 +46,12 @@ npm install openmolt
 | **Scheduling** | Interval and cron-style daily schedules with timezone support |
 | **Events** | Observable reasoning loop — hook into every tool call, plan update, and LLM output |
 | **Memory** | Long-term and short-term memory stores with `onUpdate` persistence callbacks |
-| **CLI** | `npx openmolt agent.json` to run agents from a config file |
+| **CLI** | `npx -p github:mrtchq/taskling taskling agent.json` to run agents from a config file |
 ---
 
 ## Secure by Design
 
-OpenMolt was built with security as a first-class constraint, not an afterthought.
+Taskling was built with security as a first-class constraint, not an afterthought.
 
 **Scope-gated tools.** Every integration is granted an explicit list of scopes when you attach it to an agent. If a tool requires the `write` scope and you only granted `read`, the agent cannot call it — regardless of what the LLM decides.
 
@@ -48,7 +70,7 @@ integrations: [
 **Directory-restricted filesystem.** The `FileSystem` integration is a factory that you instantiate with an explicit allowlist of directories. The agent cannot read or write outside those paths.
 
 ```typescript
-om.registerIntegration('fileSystem', OpenMolt.FileSystemIntegration('./output'));
+om.registerIntegration('fileSystem', Taskling.FileSystemIntegration('./output'));
 // agent cannot access /etc, ~/, or any path outside ./output
 ```
 
@@ -59,11 +81,11 @@ om.registerIntegration('fileSystem', OpenMolt.FileSystemIntegration('./output'))
 ## Quick Start
 
 ```typescript
-import OpenMolt from 'openmolt';
+import Taskling from 'taskling';
 
-const om = new OpenMolt({
+const om = new Taskling({
   llmProviders: {
-    openai: { apiKey: process.env.OPENMOLT_OPENAI_API_KEY },
+    openai: { apiKey: process.env.TASKLING_OPENAI_API_KEY },
   },
 });
 
@@ -81,9 +103,9 @@ console.log(result);
 
 | Variable | Provider |
 |---|---|
-| `OPENMOLT_OPENAI_API_KEY` | OpenAI |
-| `OPENMOLT_ANTHROPIC_API_KEY` | Anthropic |
-| `OPENMOLT_GOOGLE_API_KEY` | Google Gemini |
+| `TASKLING_OPENAI_API_KEY` | OpenAI |
+| `TASKLING_ANTHROPIC_API_KEY` | Anthropic |
+| `TASKLING_GOOGLE_API_KEY` | Google Gemini |
 
 ---
 
@@ -118,9 +140,9 @@ modelConfig: {
 
 ```typescript
 import { z } from 'zod';
-import OpenMolt from 'openmolt';
+import Taskling from 'taskling';
 
-const om = new OpenMolt({ llmProviders: { openai: {} } });
+const om = new Taskling({ llmProviders: { openai: {} } });
 
 const LogoSchema = z.object({
   logoUrl:    z.string().url(),
@@ -147,9 +169,9 @@ console.log(result.logoUrl, result.confidence);
 ### Gmail draft generator that runs on a schedule
 
 ```typescript
-import OpenMolt from 'openmolt';
+import Taskling from 'taskling';
 
-const om = new OpenMolt({ llmProviders: { openai: {} }, maxSteps: 30 });
+const om = new Taskling({ llmProviders: { openai: {} }, maxSteps: 30 });
 
 const agent = om.createAgent({
   name: 'GmailDraftBot',
@@ -192,12 +214,12 @@ process.on('SIGINT', () => { agent.cancelSchedule(id); process.exit(0); });
 ### Blog post writer with AI-generated images
 
 ```typescript
-import OpenMolt from 'openmolt';
+import Taskling from 'taskling';
 
-const om = new OpenMolt({ llmProviders: { openai: {} }, maxSteps: 40 });
+const om = new Taskling({ llmProviders: { openai: {} }, maxSteps: 40 });
 
 // Restrict filesystem access to ./blog only
-om.registerIntegration('fileSystem', OpenMolt.FileSystemIntegration('./blog'));
+om.registerIntegration('fileSystem', Taskling.FileSystemIntegration('./blog'));
 
 const agent = om.createAgent({
   name: 'BlogWriter',
@@ -223,7 +245,7 @@ console.log(result);
 ### Custom integration (declarative HTTP)
 
 ```typescript
-import OpenMolt, { IntegrationDefinition } from 'openmolt';
+import Taskling, { IntegrationDefinition } from 'taskling';
 import { z } from 'zod';
 
 const weatherDefinition: IntegrationDefinition = {
@@ -247,7 +269,7 @@ const weatherDefinition: IntegrationDefinition = {
   ],
 };
 
-const om = new OpenMolt({ llmProviders: { anthropic: {} } });
+const om = new Taskling({ llmProviders: { anthropic: {} } });
 om.registerIntegration('weather', weatherDefinition);
 
 const agent = om.createAgent({
@@ -330,9 +352,9 @@ agent.on('finish',         ({ result })          => console.log('Done:', result)
 Run an agent from a JSON or JS config file:
 
 ```bash
-npx openmolt agent.json
-npx openmolt agent.json --input "Summarise this week's Stripe revenue" --verbose
-npx openmolt agent.json --dry-run   # validate without running
+npx -p github:mrtchq/taskling taskling agent.json
+npx -p github:mrtchq/taskling taskling agent.json --input "Summarise this week's Stripe revenue" --verbose
+npx -p github:mrtchq/taskling taskling agent.json --dry-run   # validate without running
 ```
 
 **agent.json**
@@ -359,10 +381,69 @@ npx openmolt agent.json --dry-run   # validate without running
 
 ## Documentation
 
-Full docs, API reference, and more examples at **[openmolt.dev](https://openmolt.dev/)**.
+Full upstream docs, API reference, and more examples at **[openmolt.dev](https://openmolt.dev/)**. Taskling-specific docs: `docs/mcp.md` (MCP mode).
 
 ---
 
 ## License
 
 MIT
+
+---
+
+## Taskling CLI
+
+```bash
+taskling init                    # scaffold taskling.config.json in .
+taskling init ./my-agent --force # scaffold elsewhere / overwrite
+taskling taskling.config.json --dry-run   # validate without running
+taskling taskling.config.json             # run one agent
+taskling deploy                  # validate taskling.config.json for deployment
+taskling deploy my-config.json   # validate a named config
+taskling mcp                     # MCP server over stdio (see docs/mcp.md)
+taskling mcp --http --port 3000  # MCP over token-gated streamable HTTP
+```
+
+With no argument, `taskling` runs `./taskling.config.json` if it exists,
+otherwise it prints help. `taskling deploy` is local validation only: this
+standalone fork has no remote deploy target yet — wiring one is a later
+Phase 2 step.
+
+## Taskling MCP mode
+
+`taskling mcp` serves exactly three tools over stdio (default) or
+token-gated streamable HTTP (`--http`, requires `TASKLING_MCP_TOKEN`):
+
+- `list_agents` — agents from `./agents/*.json` (or `TASKLING_AGENTS_DIR`).
+- `run_agent` — start a run; waits with progress up to `waitMs`
+  (default 120s, max 300s), then returns the `runId` if still running.
+- `get_agent_run` — fetch a run by `runId` (status, progress, result, error).
+
+Full details, including the HTTP auth contract and the in-memory-only run
+store, are in [`docs/mcp.md`](docs/mcp.md). No per-agent tools are built
+in this phase — that is a later option.
+
+## Fork notes
+
+- **Upstream:** ybouane/openmolt.dev, version 0.1.8 at fork time
+  (commit ac6ca35, "Version bump 0.1.8"). The VPS's live control layer
+  (`moltctl`, prod :7777) was NOT touched and is NOT repointed at this
+  fork — this fork ships standalone first.
+- **License:** MIT, Copyright 2026 Yassine Bouanane, kept intact in
+  `LICENSE`. Do not remove it.
+- **Code identifiers:** the library class and types keep their upstream
+  names (`OpenMolt`, `OpenMoltConfig`) and are exported under the new
+  brand as aliases (`Taskling`, `TasklingConfig` from `taskling`).
+  Everything user-facing — package/bin name, CLI help, log prefix,
+  env-var primary names (`TASKLING_*`, with `OPENMOLT_*` as fallback),
+  README and docs — says Taskling.
+- **Distribution (GitHub-only):** the public repo is
+  <https://github.com/mrtchq/taskling> (fork of ybouane/openmolt.dev,
+  fork linkage preserved). npm is skipped by decision (2026-10-25):
+  the bare `taskling` name on npm is taken by an unrelated package
+  (see banner at the top), so install from git only:
+  `npm install github:mrtchq/taskling` (the `prepare` script builds
+  `dist/` on install).
+- **No tests upstream:** the upstream package has no `test` script, so
+  verification for this fork is `npm run build` + `taskling --help` +
+  the MCP stdio/HTTP checks described in `docs/mcp.md`.

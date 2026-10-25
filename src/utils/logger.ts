@@ -1,6 +1,6 @@
 /**
  * @module utils/logger
- * Simple levelled logger used throughout OpenMolt.
+ * Simple levelled logger used throughout Taskling.
  */
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'silent';
@@ -18,7 +18,7 @@ export class Logger {
 	private level: number;
 	private prefix: string;
 
-	constructor(prefix = 'OpenMolt', level: LogLevel = 'info') {
+	constructor(prefix = 'Taskling', level: LogLevel = 'info') {
 		this.prefix = prefix;
 		this.level = LEVELS[level];
 	}

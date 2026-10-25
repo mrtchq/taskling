@@ -8,7 +8,7 @@ title: Getting Started
 ## Installation
 
 ```bash
-npm install openmolt
+npm install github:mrtchq/taskling
 ```
 
 Set your LLM provider API key as an environment variable:
@@ -21,16 +21,16 @@ export ANTHROPIC_API_KEY=sk-ant-...
 export GOOGLE_API_KEY=AIza...
 ```
 
-OpenMolt also reads `OPENMOLT_OPENAI_API_KEY`, `OPENMOLT_ANTHROPIC_API_KEY`, and `OPENMOLT_GOOGLE_API_KEY` if the standard names aren't set.
+Taskling also reads `TASKLING_OPENAI_API_KEY`, `TASKLING_ANTHROPIC_API_KEY`, and `TASKLING_GOOGLE_API_KEY` if the standard names aren't set.
 
 ---
 
 ## Hello World
 
 ```typescript title="hello.ts"
-import OpenMolt from 'openmolt';
+import Taskling from 'taskling';
 
-const om = new OpenMolt({
+const om = new Taskling({
   llmProviders: {
     openai: { apiKey: process.env.OPENAI_API_KEY },
   },

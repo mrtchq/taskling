@@ -1,0 +1,1 @@
+{"agent":{"instructions":"You are a helpful Taskling. Complete the task given as input.","model":"openai:gpt-4o","name":"my-taskling"},"input":"Say hello and describe what you can do in one sentence.","llmProviders":{},"maxSteps":20,"verbose":false}

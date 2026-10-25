@@ -12,7 +12,7 @@ import type { IntegrationDefinition, ToolContext } from '../types/index.js';
 async function getFalClient(context: ToolContext) {
 	const { fal } = await import('@fal-ai/client');
 	fal.config({
-		credentials: (context.config?.apiKey as string | undefined) || process.env.OPENMOLT_FAL_API_KEY || '',
+		credentials: (context.config?.apiKey as string | undefined) || process.env.TASKLING_FAL_API_KEY || process.env.OPENMOLT_FAL_API_KEY || '',
 	});
 	return fal;
 }

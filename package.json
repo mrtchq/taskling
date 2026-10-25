@@ -1,7 +1,7 @@
 {
-	"name": "openmolt",
+	"name": "taskling",
 	"version": "0.1.8",
-	"description": "Programmatic AI Agent System – create, configure, and run intelligent agents that can use tools, integrations, and LLMs.",
+	"description": "Taskling - Programmatic AI Agent System (fork of OpenMolt; see README) – create, configure, and run intelligent agents that can use tools, integrations, and LLMs.",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -12,18 +12,21 @@
 		}
 	},
 	"bin": {
-		"openmolt": "./dist/cli/index.js"
+		"taskling": "./dist/cli/index.js"
 	},
 	"scripts": {
 		"build": "tsc",
+		"mcp": "node ./dist/cli/index.js mcp",
 		"dev": "tsc --watch",
 		"example": "tsx",
 		"prepublishOnly": "npm run build",
+		"prepare": "npm run build",
 		"docs": "typedoc && NODE_OPTIONS='--require ./docs/preload.cjs' docusaurus build docs",
 		"docs:dev": "typedoc && NODE_OPTIONS='--require ./docs/preload.cjs' docusaurus start docs",
 		"docs:clear": "docusaurus clear docs"
 	},
 	"keywords": [
+		"taskling",
 		"ai",
 		"agent",
 		"llm",
@@ -34,8 +37,12 @@
 		"tools",
 		"integrations"
 	],
-	"author": "OpenMolt",
+	"author": "MRTC Builds",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mrtchq/taskling.git"
+	},
 	"engines": {
 		"node": ">=18.0.0"
 	},
@@ -65,6 +72,7 @@
 	"files": [
 		"dist",
 		"README.md",
-		"LICENSE"
+		"LICENSE",
+		"taskling.config.example.json"
 	]
 }
